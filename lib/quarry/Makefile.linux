@@ -1,0 +1,2 @@
+STATIC_LIB = ar rcs
+include Makefile.targets

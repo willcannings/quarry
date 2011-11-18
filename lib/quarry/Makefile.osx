@@ -1,0 +1,4 @@
+STATIC_LIB = libtool -o
+CXX = clang++
+CPPFLAGS = -Wno-deprecated-writable-strings
+include Makefile.targets

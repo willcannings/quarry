@@ -1,3 +1,8 @@
+*.bundle
+*.o
+*.a
+output
+
 # rcov generated
 coverage
 
