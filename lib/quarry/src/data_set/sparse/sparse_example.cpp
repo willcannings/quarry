@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 double DataSet::SparseExample::get_value(int feature_index) {
-  for(int i = 0; i < count; i++)
+  for(int i = 0; i < size; i++)
     if(values[i].index == feature_index)
       return values[i].value;
   return 0.0;
@@ -16,7 +16,7 @@ double DataSet::SparseExample::get_value(string feature_name, SparseDataSet *dat
 void DataSet::SparseExample::set_value(int feature_index, double new_value) {
   int i = 0;
   
-  for(; i < count; i++) {
+  for(; i < size; i++) {
     if(values[i].index == feature_index) {
       values[i].value = new_value;
       return;
@@ -25,23 +25,23 @@ void DataSet::SparseExample::set_value(int feature_index, double new_value) {
     }
   }
   
-  if(size == count)
-    values = (Value *) realloc(values, sizeof(Value) * (++size));
+  if(buffer_size == size)
+    values = (Value *) realloc(values, sizeof(Value) * (++buffer_size));
   
-  if(i != count)
-    memcpy(&values[i + 1], &values[i], (count - i) * sizeof(Value));
+  if(i != size)
+    memcpy(&values[i + 1], &values[i], (size - i) * sizeof(Value));
   
   values[i].index = feature_index;
   values[i].value = new_value;
-  count++;
+  size++;
 }
 
 void DataSet::SparseExample::append_value(int feature_index, double new_value) {
-  if(size == count)
-    values = (Value *) realloc(values, sizeof(Value) * (++size));
-  values[count].index = feature_index;
-  values[count].value = new_value;
-  count++;
+  if(buffer_size == size)
+    values = (Value *) realloc(values, sizeof(Value) * (++buffer_size));
+  values[size].index = feature_index;
+  values[size].value = new_value;
+  size++;
 }
 
 double DataSet::SparseExample::euclidean_distance(Example *other_example) {

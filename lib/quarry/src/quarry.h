@@ -16,5 +16,7 @@
 
 #include "metrics/confusion_matrix.h"
 
+#include "preprocessing/text/text_pipeline.h"
+
 // function to show to mkmf this library exists
 void mkmf_marker();

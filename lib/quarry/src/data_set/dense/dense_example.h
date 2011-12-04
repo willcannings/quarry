@@ -8,9 +8,8 @@ namespace DataSet {
   class DenseExample : public Example {
   public:
     double *values;
-    int size;
     
-    DenseExample(int size) : Example(), size(size) {
+    DenseExample(int size) : Example(size) {
       values = (double *) calloc(size, sizeof(double));
     }
     
@@ -32,10 +31,6 @@ namespace DataSet {
     
     double cosine_distance(Example *other_example) {
       return 0.0;
-    }
-    
-    bool dense() {
-      return true;
     }
     
     void print() {

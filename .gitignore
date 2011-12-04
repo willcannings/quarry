@@ -2,6 +2,7 @@
 *.o
 *.a
 output
+Makefile
 
 # rcov generated
 coverage

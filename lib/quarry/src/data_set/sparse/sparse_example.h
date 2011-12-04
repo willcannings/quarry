@@ -14,12 +14,11 @@ namespace DataSet {
     
   public:
     Value *values;
-    int   size;
-    int   count;
+    int   buffer_size;
     
-    SparseExample(int size = 0) : Example(), size(size), count(0) {
-      if(size > 0)
-        values = (Value *) calloc(sizeof(Value), size);
+    SparseExample(int buffer_size = 0) : Example(0), buffer_size(buffer_size) {
+      if(buffer_size > 0)
+        values = (Value *) calloc(sizeof(Value), buffer_size);
     }
     
     double get_value(int feature_index);    
@@ -28,10 +27,6 @@ namespace DataSet {
     void append_value(int feature_index, double new_value);
     double euclidean_distance(Example *other_example);
     double cosine_distance(Example *other_example);
-    
-    bool sparse() {
-      return true;
-    }
   };
 }
 

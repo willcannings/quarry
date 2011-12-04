@@ -36,6 +36,18 @@ namespace DataSet {
       names.push_back(name);
     }
     
+    int value_index(string name) {
+      int index = indexes[name];
+      
+      if(index == 0) {
+        index = indexes.size() + 1;
+        indexes[name] = index;
+        names.push_back(name);
+      }
+      
+      return index;
+    }
+    
     // counts
     void prepare_for_counting(DataSet *data_set);
     void count_example(double value, int category_index);
