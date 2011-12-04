@@ -24,6 +24,6 @@ Preprocessing::Text::TextPipeline *Preprocessing::Text::StandardPipeline() {
   pipeline->processors.push_back(new Downcase());
   pipeline->processors.push_back(new PorterStemmer());
   pipeline->selectors.push_back(new StopWords());
-  pipeline->generator = new TokenCounter();
+  pipeline->generator = new TokenCounter(TokenCounter::Local);
   return pipeline;
 }

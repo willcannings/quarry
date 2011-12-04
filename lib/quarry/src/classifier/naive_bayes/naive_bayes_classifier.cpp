@@ -20,7 +20,6 @@ void Classifier::NaiveBayesClassifier::prepare() {
     
     for(int j = 0; j < numeric_features.size(); j++) {
       feature = numeric_features[j];
-      feature_caches[i][j].denom = 0;
       feature_caches[i][j].denom = 2 * feature->category_variance(i);
       feature_caches[i][j].lhs = 1 / sqrt(2 * M_PI * feature->category_variance(i));
     }
@@ -41,8 +40,10 @@ double Classifier::NaiveBayesClassifier::score(int category, DataSet::Example *e
     value = example->get_value(feature_index);
     
     // (1 / sqrt(2PI * var)) * e^(-((value - mean) ^ 2) / (2 * var))
-    numerator = -1 * pow(value - numeric_feature->category_mean(category), 2);
-    probability *= (feature_caches[category][feature_index].lhs * exp(numerator / feature_caches[category][feature_index].denom));
+    if(feature_caches[category][feature_index].denom != 0.0) {
+      numerator = -1 * pow(value - numeric_feature->category_mean(category), 2);
+      probability *= (feature_caches[category][feature_index].lhs * exp(numerator / feature_caches[category][feature_index].denom));
+    }
   }
   
   // score nominal features

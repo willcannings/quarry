@@ -8,6 +8,10 @@ namespace Preprocessing {
     class ExamplePreprocessor {
     public:
       virtual void process(DataSet::Example *example) {}
+      void process_data_set(DataSet::DataSet *data_set) {
+        for(vector<DataSet::Example *>::iterator example = data_set->examples.begin(); example != data_set->examples.end(); example++)
+          process(*example);
+      }
     };
     
   }

@@ -18,6 +18,9 @@
 #include "metrics/confusion_matrix.h"
 
 #include "preprocessing/text/text_pipeline.h"
+#include "preprocessing/examples/example_preprocessor.h"
+#include "preprocessing/examples/weights/binary_weight.h"
+#include "preprocessing/examples/weights/local_weight.h"
 
 // function to show to mkmf this library exists
 void mkmf_marker();
