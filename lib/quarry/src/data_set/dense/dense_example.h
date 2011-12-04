@@ -35,7 +35,7 @@ namespace DataSet {
     
     void print() {
       for(int i = 0; i < size; i++)
-        cout << values[i];
+        cout << values[i] << ",";
       cout << endl;
     }
   };

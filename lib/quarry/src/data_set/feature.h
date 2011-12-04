@@ -19,6 +19,7 @@ namespace DataSet {
     Feature(string name, int index) : name(name), index(index) {}
     virtual Feature *clone() { return NULL; }
     virtual void reset() {}
+    virtual void print() {}
 
     // counting
     virtual void prepare_for_counting(DataSet *data_set) {}

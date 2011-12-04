@@ -66,6 +66,7 @@ DataSet::DataSet *Storage::Folders::read() {
   
   // create an initial feature "Category"
   NominalFeature *categories = data_set->new_nominal_feature("Category");
+  data_set->set_category_index(0);
   int category_index = 0;
   
   while(dp = readdir(dir)) {

@@ -14,9 +14,11 @@ void Preprocessing::Text::SimpleTokeniser::tokenise(char *text) {
     } else {
       if(intoken) {
         intoken = false;
+        *text = 0;
         end = text;
-        pipeline->process_token(text, text);
+        pipeline->process_token(start, end);
       }
     }
-  }
+    text++;
+  }  
 }

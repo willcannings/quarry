@@ -1,4 +1,5 @@
 #include "text_pipeline.h"
+#include <iostream>
 
 DataSet::SparseExample *Preprocessing::Text::TextPipeline::process_text(char *text) {
   tokens.clear();

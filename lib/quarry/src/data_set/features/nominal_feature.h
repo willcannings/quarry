@@ -40,13 +40,15 @@ namespace DataSet {
       int index = indexes[name];
       
       if(index == 0) {
-        index = indexes.size() + 1;
+        index = indexes.size();
         indexes[name] = index;
         names.push_back(name);
       }
       
       return index;
     }
+    
+    void print();
     
     // counts
     void prepare_for_counting(DataSet *data_set);

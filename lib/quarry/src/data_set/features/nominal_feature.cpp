@@ -50,3 +50,8 @@ void DataSet::NominalFeature::index_example(double value, Example *example) {
 }
 
 void DataSet::NominalFeature::finalise_indexing(DataSet *data_set) {}
+
+void DataSet::NominalFeature::print() {
+  for(int i = 1; i < names.size(); i++)
+    cout << i << ": " << names[i] << endl;
+}

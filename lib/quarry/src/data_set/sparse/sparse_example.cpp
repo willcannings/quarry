@@ -51,3 +51,12 @@ double DataSet::SparseExample::euclidean_distance(Example *other_example) {
 double DataSet::SparseExample::cosine_distance(Example *other_example) {
   return 0.0;
 }
+
+void DataSet::SparseExample::print() {
+  for(int i = 0; i < size; i++) {
+    cout << values[i].index << ":" << values[i].value;
+    if(i < (size - 1))
+      cout << ",";
+  }
+  cout << endl;
+}
