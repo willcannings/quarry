@@ -2,6 +2,8 @@
 #define __sparse_data_set_example_h__
 #include "data_set/example.h"
 #include <stdlib.h>
+#include <string>
+using namespace std;
 
 namespace DataSet {
   class SparseDataSet;

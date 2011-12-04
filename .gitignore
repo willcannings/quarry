@@ -3,6 +3,7 @@
 *.a
 output
 Makefile
+obj/
 
 # rcov generated
 coverage

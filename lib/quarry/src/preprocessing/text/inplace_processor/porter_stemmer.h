@@ -3,10 +3,12 @@
 #include "inplace_processor.h"
 
 // from porter_stemmer_original.c
-struct stemmer;
-extern struct stemmer * create_stemmer(void);
-extern void free_stemmer(struct stemmer * z);
-extern int stem(struct stemmer * z, char * b, int k);
+extern "C" {
+  struct stemmer;
+  extern struct stemmer * create_stemmer(void);
+  extern void free_stemmer(struct stemmer * z);
+  extern int stem(struct stemmer * z, char * b, int k);
+}
 
 namespace Preprocessing {
   namespace Text {

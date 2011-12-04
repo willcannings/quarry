@@ -37,6 +37,8 @@
 #define TRUE 1
 #define FALSE 0
 
+extern "C" {
+
 /* stemmer is a structure for a few local bits of data,
 */
 
@@ -343,7 +345,7 @@ static void step5(struct stemmer * z)
    z->j = z->k;
    if (b[z->k] == 'e')
    {  int a = m(z);
-      if (a > 1 || a == 1 && !cvc(z, z->k - 1)) z->k--;
+      if ((a > 1) || (a == 1 && !cvc(z, z->k - 1))) z->k--;
    }
    if (b[z->k] == 'l' && doublec(z, z->k) && m(z) > 1) z->k--;
 }
@@ -368,3 +370,5 @@ extern int stem(struct stemmer * z, char * b, int k)
    step1ab(z); step1c(z); step2(z); step3(z); step4(z); step5(z);
    return z->k;
 }
+
+} // extern "C"

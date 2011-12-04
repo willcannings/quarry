@@ -29,16 +29,7 @@ namespace Preprocessing {
       void process_token(char *start, char *end);
     };
     
-    TextPipeline *StandardPipeline(DataSet::SparseDataSet *data_set) {
-      TextPipeline *pipeline = new TextPipeline();
-      pipeline->tokeniser = new SimpleTokeniser(pipeline);
-      pipeline->processors.push_back(new Downcase());
-      pipeline->processors.push_back(new PorterStemmer());
-      pipeline->selectors.push_back(new StopWords());
-      pipeline->generator = new TokenCounter(data_set);
-      return pipeline;
-    }
-    
+    TextPipeline *StandardPipeline(DataSet::SparseDataSet *data_set);
   }
 }
 
