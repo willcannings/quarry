@@ -8,9 +8,8 @@ namespace Preprocessing {
     
     class ExampleGenerator {
     public:
-      DataSet::SparseDataSet *data_set;
-      ExampleGenerator(DataSet::SparseDataSet *data_set) : data_set(data_set) {}
-      virtual DataSet::SparseExample *generate(vector<char *> *tokens) { return NULL; }
+      ExampleGenerator() {}
+      virtual DataSet::SparseExample *generate(DataSet::SparseDataSet *data_set, vector<char *> *tokens) { return NULL; }
     };
     
   }

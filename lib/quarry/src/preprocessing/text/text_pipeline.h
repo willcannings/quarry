@@ -25,11 +25,11 @@ namespace Preprocessing {
       vector<char *> tokens;
       
       TextPipeline() : processors(), selectors(), tokens() {}      
-      DataSet::SparseExample *process_text(char *text);
+      DataSet::SparseExample *process_text(DataSet::SparseDataSet *data_set, char *text);
       void process_token(char *start, char *end);
     };
     
-    TextPipeline *StandardPipeline(DataSet::SparseDataSet *data_set);
+    TextPipeline *StandardPipeline();
   }
 }
 

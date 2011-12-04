@@ -9,9 +9,9 @@ namespace Preprocessing {
     class TokenCounter : public ExampleGenerator {
     public:
       map<string, int> token_counts;
-      TokenCounter(DataSet::SparseDataSet *data_set) : ExampleGenerator(data_set), token_counts() {}
+      TokenCounter() : ExampleGenerator(), token_counts() {}
       
-      DataSet::SparseExample *generate(vector<char *> *tokens) {
+      DataSet::SparseExample *generate(DataSet::SparseDataSet *data_set, vector<char *> *tokens) {
         DataSet::SparseExample *example = data_set->new_example();
         token_counts.clear();
         string token;
@@ -25,7 +25,7 @@ namespace Preprocessing {
         // construct the example
         DataSet::NominalFeature *categories = data_set->category_feature();
         for(map<string, int>::iterator token_counts_it = token_counts.begin(); token_counts_it != token_counts.end(); token_counts_it++) {
-          example->set_value(categories->value_index(token_counts_it->first), token_counts_it->second);
+          example->set_value(data_set->get_or_create_numeric_feature_by_name(token_counts_it->first)->index, token_counts_it->second);
         }
         
         return example;

@@ -56,6 +56,20 @@ namespace DataSet {
     Feature  *get_feature_by_name(string name)  { return feature_names[name]; }
     Feature  *get_feature_by_index(int index)   { return features[index]; }
     Example  *get_example_by_index(int index)   { return examples[index]; }
+    
+    NumericFeature *get_or_create_numeric_feature_by_name(string name)  {
+      NumericFeature *feature = (NumericFeature *)feature_names[name];
+      if(feature == NULL)
+        feature = new_numeric_feature(name);
+      return feature;
+    }
+    
+    NominalFeature *get_or_create_nominal_feature_by_name(string name)  {
+      NominalFeature *feature = (NominalFeature *)feature_names[name];
+      if(feature == NULL)
+        feature = new_nominal_feature(name);
+      return feature;
+    }
   };
 }
 

@@ -1,5 +1,6 @@
 #include "storage/storage.h"
 #include "storage/arff.h"
+#include "storage/folders.h"
 
 #include "data_set/data_set.h"
 #include "data_set/dense/dense_data_set.h"

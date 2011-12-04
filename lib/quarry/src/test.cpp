@@ -9,19 +9,13 @@ int main() {
   ConfusionMatrix *cm = ds->cross_fold_validation(c, 2);
   cm->print_summary();*/
   
-  DataSet::SparseDataSet *data_set = new DataSet::SparseDataSet();
-  DataSet::NominalFeature *categories = data_set->new_nominal_feature("Category");
-  data_set->set_category_index(0);
+  Preprocessing::Text::TextPipeline *pipeline = Preprocessing::Text::StandardPipeline();
+  Storage::Folders *reader = new Storage::Folders("/Users/will/dev/classifier/small", pipeline);
+  DataSet::DataSet *data_set = reader->read();
   
-  Preprocessing::Text::TextPipeline *pipeline = Preprocessing::Text::StandardPipeline(data_set);
-  
-  char *text = "hello world foo bar hello test yes.";
-  char *sample = (char *) malloc(strlen(text) + 1);
-  strcpy(sample, text);
-  
-  DataSet::SparseExample *example = pipeline->process_text(sample);
   data_set->category_feature()->print();
-  example->print();
+  cout << "Examples: " << data_set->examples_size() << ", features: " << data_set->features_size() << endl;
+  data_set->examples[1]->print();
   
   return 0;
 }

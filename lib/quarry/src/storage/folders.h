@@ -10,6 +10,8 @@ using namespace std;
 
 namespace Storage {
   class Folders : public Storage {
+    void load_directory(string path, DataSet::SparseDataSet *data_set, int category_index);
+    
   public:
     Preprocessing::Text::TextPipeline *pipeline;
     string  path;
