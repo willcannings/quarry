@@ -4,6 +4,22 @@
 
 namespace DataSet {
   class DenseDataSet : public DataSet {
+    void perform_count() {
+      int example_category_index = 0;
+      double value = 0.0;
+      
+      for(vector<Example *>::iterator example = examples.begin(); example < examples.end(); example++) {
+        example_category_index = (int)((*example)->get_value(category_index));
+        for(unsigned int i = 0; i < features.size(); i++) {
+          value = (*example)->get_value(i);
+          features[i]->count_example(value, example_category_index);
+        }
+      }
+    }
+    
+    void perform_index() {
+    }
+    
   public:
     DenseDataSet() : DataSet() {}
     DenseDataSet(DataSet *other) : DataSet(other) {}

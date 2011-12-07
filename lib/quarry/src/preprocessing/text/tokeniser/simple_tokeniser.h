@@ -7,6 +7,9 @@ namespace Preprocessing {
     
     class SimpleTokeniser : public Tokeniser {
     public:
+      static const uint32_t file_mark = 'simt';
+      uint32_t mark() { return file_mark; }
+      
       SimpleTokeniser(TextPipeline *pipeline) : Tokeniser(pipeline) {}
       void tokenise(char *text);
     };

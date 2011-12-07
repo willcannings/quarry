@@ -8,6 +8,7 @@ namespace Preprocessing {
     public:
       InplaceProcessor() {}
       virtual char *process(char *start, char *end) { return end; }
+      virtual uint32_t mark() = 0;
     };
     
   }

@@ -21,7 +21,7 @@ Jeweler::Tasks.new do |gem|
   gem.description = "C++ Data Mining Library for Ruby"
   gem.email = "me@willcannings.com"
   gem.authors = ["Will Cannings"]
-  # dependencies defined in Gemfile
+  s.add_runtime_dependency 'rice'
 end
 Jeweler::RubygemsDotOrgTasks.new
 

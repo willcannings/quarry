@@ -33,9 +33,6 @@ void DataSet::DataSet::set_category_index(int index) {
 
 
 void DataSet::DataSet::count() {
-  int example_category_index = 0;
-  double value = 0.0;
-  
   if(counted)
     return;
   
@@ -43,14 +40,8 @@ void DataSet::DataSet::count() {
   for(vector<Feature *>::iterator feature = features.begin(); feature < features.end(); feature++)
     (*feature)->prepare_for_counting(this);
   
-  // count
-  for(vector<Example *>::iterator example = examples.begin(); example < examples.end(); example++) {
-    example_category_index = (int)((*example)->get_value(category_index));
-    for(int i = 0; i < features.size(); i++) {
-      value = (*example)->get_value(i);
-      features[i]->count_example(value, example_category_index);
-    }
-  }
+  // implementation optimised count
+  perform_count();
   
   // calculate and finalise counts
   for(vector<Feature *>::iterator feature = features.begin(); feature < features.end(); feature++)
@@ -111,6 +102,7 @@ ConfusionMatrix *DataSet::DataSet::cross_fold_validation(Classifier::Classifier 
   int examples_per_test = examples_per_fold * (number_of_folds - 1);
   
   for(int fold = 0; fold < number_of_folds; fold++) {
+    cout << "Running fold " << fold << endl;
     test_set = clone_without_examples();
     test_set->examples.reserve(examples_per_test);
     for(int i = 0; i < number_of_folds; i++) {
@@ -129,9 +121,9 @@ ConfusionMatrix *DataSet::DataSet::cross_fold_validation(Classifier::Classifier 
     }
     
     overall_matrix->merge(result);
-    //delete test_classifier;
-    //delete test_set;
-    //delete result;
+    delete test_classifier;
+    delete test_set;
+    delete result;
   }
   
   return overall_matrix;

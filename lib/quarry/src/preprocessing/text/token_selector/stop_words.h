@@ -7,6 +7,9 @@ namespace Preprocessing {
     
     class StopWords : public TokenSelector {
     public:
+      static const uint32_t file_mark = 'stop';
+      uint32_t mark() { return file_mark; }
+
       StopWords();
       bool select(char *start, char *end);
     };

@@ -1,5 +1,6 @@
 #include "stop_words.h"
 #include <tr1/unordered_set>
+#include <iostream>
 using namespace std;
 using namespace tr1;
 

@@ -26,6 +26,8 @@ namespace DataSet {
       examples_with_value.clear();
     }
     
+    void print();
+    
     // nominal values are referenced by index in examples
     // (e.g "CategoryA" -> 2; would be stored as 2 in an example)
     map<string, int>  indexes;
@@ -38,17 +40,13 @@ namespace DataSet {
     
     int value_index(string name) {
       int index = indexes[name];
-      
       if(index == 0) {
         index = indexes.size();
         indexes[name] = index;
         names.push_back(name);
       }
-      
       return index;
     }
-    
-    void print();
     
     // counts
     void prepare_for_counting(DataSet *data_set);

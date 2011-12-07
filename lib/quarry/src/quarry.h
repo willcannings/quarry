@@ -1,7 +1,3 @@
-#include "storage/storage.h"
-#include "storage/arff.h"
-#include "storage/folders.h"
-
 #include "data_set/data_set.h"
 #include "data_set/dense/dense_data_set.h"
 #include "data_set/sparse/sparse_data_set.h"
@@ -21,6 +17,13 @@
 #include "preprocessing/examples/example_preprocessor.h"
 #include "preprocessing/examples/weights/binary_weight.h"
 #include "preprocessing/examples/weights/local_weight.h"
+
+#include "model/model.h"
+
+#include "storage/storage.h"
+#include "storage/arff.h"
+#include "storage/folders.h"
+#include "storage/binary.h"
 
 // function to show to mkmf this library exists
 void mkmf_marker();

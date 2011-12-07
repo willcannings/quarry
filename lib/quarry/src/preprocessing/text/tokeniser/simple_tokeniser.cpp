@@ -4,8 +4,13 @@
 void Preprocessing::Text::SimpleTokeniser::tokenise(char *text) {
   char *start, *end;
   bool intoken = false;
+  bool active  = true;
   
-  while(*text) {
+  // to simplify the code, the while condition is not while(*text),
+  // because the if(intoken) block needs to run when *text == 0 at
+  // the end of the string.
+  while(active) {
+    active = *text;
     if(isalnum(*text)) {
       if(!intoken) {
         intoken = true;

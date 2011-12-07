@@ -7,6 +7,9 @@ namespace Preprocessing {
     
     class POSTagSelector : public TokenSelector {
     public:
+      static const uint32_t file_mark = 'post';
+      uint32_t mark() { return file_mark; }
+      
       bool select(char *start, char *end) {
         return true;
       }

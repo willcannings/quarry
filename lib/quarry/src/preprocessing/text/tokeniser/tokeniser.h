@@ -10,6 +10,7 @@ namespace Preprocessing {
       TextPipeline *pipeline;
       Tokeniser(TextPipeline *pipeline) : pipeline(pipeline) {}
       virtual void tokenise(char *text) {}
+      virtual uint32_t mark() = 0;
     };
     
   }

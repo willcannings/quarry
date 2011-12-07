@@ -8,6 +8,9 @@ namespace Preprocessing {
     
     class TokenCounter : public ExampleGenerator {
     public:
+      static const uint32_t file_mark = 'tcou';
+      uint32_t mark() { return file_mark; }
+      
       typedef enum {
         Count,
         Local,
@@ -20,10 +23,9 @@ namespace Preprocessing {
       TokenCounter(TokenCounterWeight weight = Count) : ExampleGenerator(), token_counts(), weight(weight) {}
       
       DataSet::SparseExample *generate(DataSet::SparseDataSet *data_set, vector<char *> *tokens) {
-        DataSet::SparseExample *example = data_set->new_example();
-        token_counts.clear();
         int max_count = 0, count = 0;
         double value = 0.0;
+        token_counts.clear();
         string token;
         
         // count the number of occurrences of each token
@@ -35,6 +37,7 @@ namespace Preprocessing {
         }
         
         // construct the example
+        DataSet::SparseExample *example = data_set->new_example(token_counts.size());
         for(map<string, int>::iterator token_counts_it = token_counts.begin(); token_counts_it != token_counts.end(); token_counts_it++) {
           value = token_counts_it->second;
           

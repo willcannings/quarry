@@ -10,6 +10,7 @@ namespace Preprocessing {
     public:
       ExampleGenerator() {}
       virtual DataSet::SparseExample *generate(DataSet::SparseDataSet *data_set, vector<char *> *tokens) { return NULL; }
+      virtual uint32_t mark() = 0;
     };
     
   }

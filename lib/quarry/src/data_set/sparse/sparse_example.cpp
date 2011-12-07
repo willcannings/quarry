@@ -3,9 +3,29 @@
 #include <stdlib.h>
 
 double DataSet::SparseExample::get_value(int feature_index) {
-  for(int i = 0; i < size; i++)
-    if(values[i].index == feature_index)
-      return values[i].value;
+  if(feature_index == 0 && size != 0)
+    return values[0].value;
+  
+  int low = 0;
+  int high = size - 1;
+  int mid = high / 2;
+  
+  // branch prediction makes this triple clause if statement faster
+  // than a double clause "single comparison" search. precondition
+  // loops also seem to be faster than post condition loops in GCC,
+  // really don't know why... this implementation ends up being
+  // around 30% faster than well known single comparison versions.
+  while(low <= high) {
+    if(values[mid].index < feature_index) {
+      low = mid + 1;
+    } else if(values[mid].index > feature_index) {
+      high = mid - 1;
+    } else {
+      return values[mid].value;
+    }
+    mid = (high + low) / 2;
+  }
+  
   return 0.0;
 }
 

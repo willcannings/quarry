@@ -30,6 +30,7 @@
 
 #include <stdlib.h>  /* for malloc, free */
 #include <string.h>  /* for memcmp, memmove */
+#include <iostream>
 
 /* The main part of the stemming algorithm starts here.
 */

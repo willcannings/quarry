@@ -14,6 +14,8 @@ class ConfusionMatrix;
 
 namespace DataSet {
   class DataSet {
+    virtual void perform_count() {}
+    virtual void perform_index() {}
   public:
     DataSet() : category_index(-1), counted(false), indexed(false) {}
     DataSet(DataSet *other) : name(other->name), category_index(other->category_index), counted(false), indexed(false) {

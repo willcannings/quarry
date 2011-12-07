@@ -1,4 +1,6 @@
 STATIC_LIB = libtool -o
 CXX = clang++
 CPPFLAGS = -Wno-deprecated-writable-strings
+#CXX = g++
+#CPPFLAGS = -ggdb
 include Makefile.targets

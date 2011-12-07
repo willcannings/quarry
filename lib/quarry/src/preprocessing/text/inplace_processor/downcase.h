@@ -8,6 +8,9 @@ namespace Preprocessing {
     
     class Downcase : public InplaceProcessor {
     public:
+      static const uint32_t file_mark = 'down';
+      uint32_t mark() { return file_mark; }
+      
       char *process(char *start, char *end) {
         while(start != end) {
           *start = tolower(*start);

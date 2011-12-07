@@ -9,12 +9,12 @@ namespace DataSet {
   class SparseDataSet;
   
   class SparseExample : public Example {
+  public:
     typedef struct {
       int     index;
       double  value;
     } Value;
     
-  public:
     Value *values;
     int   buffer_size;
     

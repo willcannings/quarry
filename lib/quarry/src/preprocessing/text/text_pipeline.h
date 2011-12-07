@@ -8,6 +8,7 @@
 #include "inplace_processor/porter_stemmer.h"
 #include "token_selector/token_selector.h"
 #include "token_selector/stop_words.h"
+#include "token_selector/pos_tag_selector.h"
 #include "tokeniser/tokeniser.h"
 #include "tokeniser/simple_tokeniser.h"
 #include <vector>
@@ -24,7 +25,7 @@ namespace Preprocessing {
       ExampleGenerator *generator;
       vector<char *> tokens;
       
-      TextPipeline() : processors(), selectors(), tokens() {}      
+      TextPipeline() : tokeniser(NULL), processors(), selectors(), generator(NULL), tokens() {}      
       DataSet::SparseExample *process_text(DataSet::SparseDataSet *data_set, char *text);
       void process_token(char *start, char *end);
     };

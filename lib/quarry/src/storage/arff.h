@@ -1,8 +1,7 @@
 #ifndef __arff_h__
 #define __arff_h__
-#include "data_set/data_set.h"
-#include "data_set/dense/dense_data_set.h"
 #include "storage/storage.h"
+#include "data_set/dense/dense_data_set.h"
 #include <algorithm>
 #include <cctype>
 #include <string>

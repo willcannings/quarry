@@ -15,6 +15,9 @@ namespace Preprocessing {
     
     class PorterStemmer : public InplaceProcessor {
     public:
+      static const uint32_t file_mark = 'port';
+      uint32_t mark() { return file_mark; }
+      
       struct stemmer *stemm;
       PorterStemmer() : InplaceProcessor() {
         stemm = create_stemmer();
@@ -26,7 +29,7 @@ namespace Preprocessing {
       
       char *process(char *start, char *end) {
         int length = end - start;
-        int new_length = stem(stemm, start, end-start);
+        int new_length = stem(stemm, start, end - start - 1);
         
         for(int i = new_length + 1; i <= length; i++)
           start[i] = 0;

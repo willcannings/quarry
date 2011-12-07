@@ -8,6 +8,10 @@
 #include <typeinfo>
 using namespace std;
 
+namespace Storage {
+  class Binary;
+}
+
 namespace Classifier {
   
   class Score {
@@ -16,9 +20,8 @@ namespace Classifier {
     double  score;
     
     Score(int category, double score) : category(category), score(score) {}
-    
     static bool compare (Score a, Score b) {
-      return a.score < b.score;
+      return b.score < a.score; // descending
     }
   };
   
@@ -26,33 +29,19 @@ namespace Classifier {
   class Classifier {
   public:
     DataSet::DataSet *data_set;
-    vector<DataSet::NumericFeature *> numeric_features;
-    vector<DataSet::NominalFeature *> nominal_features;
+    vector<bool> numeric_features;
+    vector<bool> nominal_features;
     
-    Classifier(DataSet::DataSet *data_set) : data_set(data_set) {
-      DataSet::Feature *feature = NULL; 
-
+    Classifier(DataSet::DataSet *data_set) : data_set(data_set), numeric_features(data_set->features_size(), 0), nominal_features(data_set->features_size(), 0) {
+      DataSet::Feature *feature = NULL;
+      
       for(unsigned int i = 0; i < data_set->features.size(); i++) {
         feature = data_set->features[i];
         if(typeid(*feature) == typeid(DataSet::NumericFeature))
-          numeric_features.push_back((DataSet::NumericFeature *)feature);
+          numeric_features[i] = true;
         else
-          nominal_features.push_back((DataSet::NominalFeature *)feature);
+          nominal_features[i] = true;
       }
-    }
-    
-    Classifier(DataSet::DataSet *data_set, vector<DataSet::NumericFeature *> num_features, vector<DataSet::NominalFeature *> nom_features) : data_set(data_set), numeric_features(), nominal_features() {
-      // when constructed as a clone of a previous classifier, features in
-      // numeric_features and nominal_features are references to features
-      // in the previous data set.
-      numeric_features.reserve(num_features.size());
-      nominal_features.reserve(nom_features.size());
-      
-      for(int i = 0; i < num_features.size(); i++)
-        numeric_features.push_back((DataSet::NumericFeature *)data_set->features[num_features[i]->index]);
-      
-      for(int i = 0; i < nom_features.size(); i++)
-        nominal_features.push_back((DataSet::NominalFeature *)data_set->features[nom_features[i]->index]);
     }
     
     virtual void prepare() {};
@@ -61,6 +50,9 @@ namespace Classifier {
     virtual int classify(DataSet::Example *example);
     virtual vector<Score> *rank(DataSet::Example *example);
     virtual vector<Score> *score_all(DataSet::Example *example);
+    virtual void write_binary(Storage::Binary *file) {}
+    virtual void read_binary(Storage::Binary *file) {}
+    virtual uint32_t mark() = 0;
   };
 }
 

@@ -4,6 +4,7 @@
 output
 Makefile
 obj/
+mkmf.log
 
 # rcov generated
 coverage

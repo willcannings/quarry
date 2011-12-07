@@ -8,6 +8,7 @@ using namespace std;
 
 static char *file_data = NULL;
 static int file_data_size = 0;
+static int file_count = 0;
 
 
 void Storage::Folders::load_directory(string path, DataSet::SparseDataSet *data_set, int category_index) {
@@ -47,12 +48,16 @@ void Storage::Folders::load_directory(string path, DataSet::SparseDataSet *data_
     
     // read into the buffer
     fread(file_data, 1, file_length - 1, file);
-    file_data[file_length] = 0;
+    file_data[file_length - 1] = 0;
     fclose(file);
     
     // insert a new example into the dataset
     example = pipeline->process_text(data_set, file_data);
     example->set_category_index(data_set, category_index);
+    
+    file_count++;
+    if((file_count % 10000) == 0)
+      cout << "Read " << file_count << endl;
   }
   
   closedir(dir);

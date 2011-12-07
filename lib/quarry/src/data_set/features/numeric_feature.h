@@ -2,6 +2,7 @@
 #define __numeric_feature_h__
 #include "data_set/example.h"
 #include "data_set/feature.h"
+#include <iostream>
 
 namespace DataSet {
   class DataSet;
@@ -62,6 +63,12 @@ namespace DataSet {
     double category_max(int index)            { return category_counts[index].max; }
     double category_mean(int index)           { return category_counts[index].mean; }
     double category_variance(int index)       { return category_counts[index].variance; }
+    
+    void print(DataSet *data_set);
+    
+    void print_counts(Counts *c) {
+      cout << c->non_zero_count << ";" << c->sum << ";" << c->sq_sum << ";" << c->min << ";" << c->max << ";" << c->mean << ";" << c->variance << endl;
+    }
     
     // indexes
     vector<Example *> non_zero_examples;
