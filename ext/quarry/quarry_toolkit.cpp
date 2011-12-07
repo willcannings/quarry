@@ -31,6 +31,20 @@ Object model_rank_text(Object self, Object text) {
   return indexes;
 }
 
+Object model_rank_text_names(Object self, Object text) {
+  Model::Model *model = from_ruby<Model::Model *>(self);
+  string example_text = from_ruby<string>(text);
+  Array names;
+  
+  vector<Classifier::Score> *ranks = model->rank_text(example_text);
+  DataSet::NominalFeature *categories = model->data_set->category_feature();
+  for(unsigned int i = 0; i < ranks->size(); i++)
+    names.push(categories->names[ranks->at(i).category]);
+  
+  delete ranks;
+  return names;
+}
+
 
 extern "C" {
 	
@@ -45,8 +59,8 @@ extern "C" {
     // text pipeline
     rb_mText.define_module_function("standard_pipeline", &Preprocessing::Text::StandardPipeline);
     Data_Type<Preprocessing::Text::TextPipeline> rb_cTextPipeline = define_class_under<Preprocessing::Text::TextPipeline>(rb_mQuarry, "ImplTextPipeline")
-      .define_constructor(Constructor<Preprocessing::Text::TextPipeline>())
-      .define_method("process_text", &Preprocessing::Text::TextPipeline::process_text);
+      .define_constructor(Constructor<Preprocessing::Text::TextPipeline>());
+//      .define_method("process_text", &Preprocessing::Text::TextPipeline::process_text);
     
     // storage
     Data_Type<Storage::Storage> rb_cStorage = define_class_under<Storage::Storage>(rb_mQuarry, "ImplStorage");
@@ -83,7 +97,8 @@ extern "C" {
       .define_method("set_text_pipeline", &Model::Model::set_text_pipeline)
       .define_method("get_text_pipeline", &Model::Model::get_text_pipeline)
       .define_method("rank", &model_rank)
-      .define_method("rank_text", &model_rank_text);
+      .define_method("rank_text", &model_rank_text)
+      .define_method("rank_text_names", &model_rank_text_names);
       
 
     

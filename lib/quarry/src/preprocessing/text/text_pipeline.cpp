@@ -1,10 +1,10 @@
 #include "text_pipeline.h"
 #include <iostream>
 
-DataSet::SparseExample *Preprocessing::Text::TextPipeline::process_text(DataSet::SparseDataSet *data_set, char *text) {
+DataSet::SparseExample *Preprocessing::Text::TextPipeline::process_text(DataSet::SparseDataSet *data_set, char *text, bool create_features) {
   tokens.clear();
   tokeniser->tokenise(text);
-  return generator->generate(data_set, &tokens);
+  return generator->generate(data_set, &tokens, create_features);
 }
 
 void Preprocessing::Text::TextPipeline::process_token(char *start, char *end) {

@@ -52,5 +52,9 @@ module Quarry
     def rank_text(text)
       @model.rank_text(text)
     end
+    
+    def rank_text_names(text)
+      @model.rank_text_names(text)
+    end
   end
 end

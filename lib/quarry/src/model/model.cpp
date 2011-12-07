@@ -11,7 +11,7 @@ int Model::Model::classify(DataSet::Example *example) {
 }
 
 int Model::Model::classify_text(string text) {
-  DataSet::SparseExample *example = text_pipeline->process_text((DataSet::SparseDataSet *)data_set, (char *)text.c_str());
+  DataSet::SparseExample *example = text_pipeline->process_text((DataSet::SparseDataSet *)data_set, (char *)text.c_str(), false);
   int category = classifier->classify(example);
   delete example;
   return category;
@@ -22,7 +22,7 @@ vector<Classifier::Score> *Model::Model::rank(DataSet::Example *example) {
 }
 
 vector<Classifier::Score> *Model::Model::rank_text(string text) {
-  DataSet::SparseExample *example = text_pipeline->process_text((DataSet::SparseDataSet *)data_set, (char *)text.c_str());
+  DataSet::SparseExample *example = text_pipeline->process_text((DataSet::SparseDataSet *)data_set, (char *)text.c_str(), false);
   vector<Classifier::Score> *ranks = classifier->rank(example);
   delete example;
   return ranks;

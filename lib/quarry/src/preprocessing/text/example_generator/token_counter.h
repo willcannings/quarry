@@ -22,7 +22,7 @@ namespace Preprocessing {
       
       TokenCounter(TokenCounterWeight weight = Count) : ExampleGenerator(), token_counts(), weight(weight) {}
       
-      DataSet::SparseExample *generate(DataSet::SparseDataSet *data_set, vector<char *> *tokens) {
+      DataSet::SparseExample *generate(DataSet::SparseDataSet *data_set, vector<char *> *tokens, bool create_features) {
         int max_count = 0, count = 0;
         double value = 0.0;
         token_counts.clear();
@@ -38,6 +38,8 @@ namespace Preprocessing {
         
         // construct the example
         DataSet::SparseExample *example = data_set->new_example(token_counts.size());
+        DataSet::Feature *feature = NULL;
+        
         for(map<string, int>::iterator token_counts_it = token_counts.begin(); token_counts_it != token_counts.end(); token_counts_it++) {
           value = token_counts_it->second;
           
@@ -46,7 +48,13 @@ namespace Preprocessing {
           else if(weight == Binary)
             value = 1;
           
-          example->set_value(data_set->get_or_create_numeric_feature_by_name(token_counts_it->first)->index, value);
+          if(create_features) {
+            example->set_value(data_set->get_or_create_numeric_feature_by_name(token_counts_it->first)->index, value);
+          } else {
+            feature = data_set->get_feature_by_name(token_counts_it->first);
+            if(feature)
+              example->set_value(feature->index, value);
+          }
         }
         
         return example;

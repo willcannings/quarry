@@ -26,7 +26,7 @@ namespace Preprocessing {
       vector<char *> tokens;
       
       TextPipeline() : tokeniser(NULL), processors(), selectors(), generator(NULL), tokens() {}      
-      DataSet::SparseExample *process_text(DataSet::SparseDataSet *data_set, char *text);
+      DataSet::SparseExample *process_text(DataSet::SparseDataSet *data_set, char *text, bool create_features);
       void process_token(char *start, char *end);
     };
     

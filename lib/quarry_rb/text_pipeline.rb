@@ -5,8 +5,8 @@ module Quarry
       @text_pipeline = tp || Quarry::ImplTextPipeline.new
     end
     
-    def process_text(data_set, text)
-      Example.new(@text_pipeline.process_text(data_set, text))
+    def process_text(data_set, text, create_features = false)
+      Example.new(@text_pipeline.process_text(data_set, text, create_features))
     end
     
     def self.standard_pipeline
