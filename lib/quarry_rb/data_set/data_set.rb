@@ -15,15 +15,15 @@ module Quarry
       end
       
       def examples
-        @examples ||= EnumerableHelper.new(self, @data_set, Example, :examples_size, :get_example_by_index)
+        @examples ||= EnumerableHelper.new(self, @data_set, ::Quarry::DataSet::Example, :examples_size, :get_example_by_index)
       end
       
       def categories
-        @categories ||= EnumerableHelper.new(self, @data_set, Category, :categories_size, :get_category_by_index)
+        @categories ||= EnumerableHelper.new(self, @data_set, ::Quarry::DataSet::Category, :categories_size, :get_category_by_index)
       end
       
       def features
-        @features ||= EnumerableHelper.new(self, @data_set, Feature, :features_size, :get_feature_by_index)
+        @features ||= EnumerableHelper.new(self, @data_set, ::Quarry::DataSet::Feature, :features_size, :get_feature_by_index)
       end
       
       def stratify(classifier, folds, skip_fold)

@@ -16,6 +16,8 @@ namespace Model {
     
     void train(DataSet::Example *example);
     void train_text(string text);
+    DataSet::Example *process_text(string text, bool create_features);
+    void add_text_example(string text, string category);
     int classify(DataSet::Example *example);
     int classify_text(string text);
     vector<Classifier::Score> *rank(DataSet::Example *example);

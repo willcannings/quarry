@@ -25,8 +25,7 @@ module Quarry
       end
       
       def category=(new_category)
-        raise "new_category must be an instance of Quarry::DataSet::Category" unless new_category.is_a?(Category)
-        @example.set_category(new_category.category)
+        @example.set_category_index(@data_set.data_set, new_category)
       end
     end
   end

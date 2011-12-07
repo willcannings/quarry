@@ -448,7 +448,6 @@ Model::Model *Storage::Binary::read_model() {
 void Storage::Binary::write_model(Model::Model *model) {
   open_for_writing();
   
-  // write the 3 model components
   write_data_set(model->data_set);
   write_classifier(model->classifier);
   write_text_pipeline(model->text_pipeline);

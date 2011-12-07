@@ -21,6 +21,7 @@ void Classifier::NaiveBayesClassifier::prepare() {
     feature_caches[i].resize(features_size);
     
     for(int j = 0; j < features_size; j++) {
+      // FIXME: need to wipe numeric_features[j] here in case category j was, now isn't numeric on a second call to prepare
       if(!numeric_features[j])
         continue;
       feature = (DataSet::NumericFeature *) data_set->features[j];
@@ -62,12 +63,12 @@ double Classifier::NaiveBayesClassifier::score(int category, DataSet::Example *e
 }
 
 void Classifier::NaiveBayesClassifier::write_binary(Storage::Binary *file) {
-  int category_count = feature_caches.size();
+  int category_count = feature_caches.size() - 1;
   file->write_int(category_count);
   file->write_vector<double>(&category_probabilities);
   
   for(int i = 1; i <= category_count; i++)
-    file->write_vector<NumericFeatureCache>(&feature_caches[i]);
+    file->write_vector<NumericFeatureCache>(&(feature_caches[i]));
 }
 
 void Classifier::NaiveBayesClassifier::read_binary(Storage::Binary *file) {

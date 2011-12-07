@@ -6,7 +6,7 @@ module Quarry
     end
     
     def process_text(data_set, text, create_features = false)
-      Example.new(@text_pipeline.process_text(data_set, text, create_features))
+      ::Quarry::DataSet::Example.new(@text_pipeline.process_text(data_set.data_set, text, create_features))
     end
     
     def self.standard_pipeline

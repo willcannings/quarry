@@ -60,7 +60,7 @@ extern "C" {
     rb_mText.define_module_function("standard_pipeline", &Preprocessing::Text::StandardPipeline);
     Data_Type<Preprocessing::Text::TextPipeline> rb_cTextPipeline = define_class_under<Preprocessing::Text::TextPipeline>(rb_mQuarry, "ImplTextPipeline")
       .define_constructor(Constructor<Preprocessing::Text::TextPipeline>());
-//      .define_method("process_text", &Preprocessing::Text::TextPipeline::process_text);
+      //.define_method("process_text", &Preprocessing::Text::TextPipeline::process_text);
     
     // storage
     Data_Type<Storage::Storage> rb_cStorage = define_class_under<Storage::Storage>(rb_mQuarry, "ImplStorage");
@@ -90,6 +90,8 @@ extern "C" {
       .define_method("train_text", &Model::Model::train_text)
       .define_method("classify", &Model::Model::classify)
       .define_method("classify_text", &Model::Model::classify_text)
+      .define_method("process_text", &Model::Model::process_text)
+      .define_method("add_text_example", &Model::Model::add_text_example)
       .define_method("set_data_set", &Model::Model::set_data_set)
       .define_method("get_data_set", &Model::Model::get_data_set)
       .define_method("set_classifier", &Model::Model::set_classifier)
@@ -110,6 +112,7 @@ extern "C" {
     
     Data_Type<DataSet::Example> rb_cDataSetExample = define_class_under<DataSet::Example>(rb_mDataSet, "ImplExample")
       .define_method("category_index", &DataSet::Example::category_index)
+      .define_method("set_category_index", &DataSet::Example::set_category_index)
       .define_method("get_value", &DataSet::Example::get_value)
       .define_method("set_value", &DataSet::Example::set_value)
       .define_constructor(Constructor<DataSet::Example, int>());
