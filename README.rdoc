@@ -1,4 +1,4 @@
-= quarry
+= thera
 
 Ruby Data Mining Library
 

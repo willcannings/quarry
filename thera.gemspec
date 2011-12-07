@@ -2,7 +2,7 @@
 $:.push File.expand_path('../lib', __FILE__)
 
 Gem::Specification.new do |s|
-  s.name = "quarry"
+  s.name = "thera"
   s.homepage = "http://github.com/willcannings/quarry"
   s.license = "Public Domain"
   s.summary = "Ruby Data Mining Library"
