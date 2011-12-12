@@ -32,6 +32,7 @@ namespace Classifier {
     vector<bool> numeric_features;
     vector<bool> nominal_features;
     
+    Classifier() {}
     Classifier(DataSet::DataSet *data_set) : data_set(data_set), numeric_features(data_set->features_size(), 0), nominal_features(data_set->features_size(), 0) {
       DataSet::Feature *feature = NULL;
       
