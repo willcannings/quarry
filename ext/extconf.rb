@@ -15,7 +15,7 @@ Dir.chdir(quarry_dir) do
     `make -f Makefile.osx clean`
     `make -f Makefile.osx`
   else
-    cflags += ' -std=g++0x -Wno-multichar -frtti'
+    cflags += ' -std=gnu++0x -Wno-multichar -frtti'
     puts "Compiling quarry (linux mode)"
     `make -f Makefile.linux clean`
     `make -f Makefile.linux`
