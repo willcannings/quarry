@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.description = "C++ Data Mining Library for Ruby"
   s.email = "me@willcannings.com"
   s.authors = ["Will Cannings"]
-  s.version = '0.0.4'
+  s.version = '0.0.5'
   s.extensions = ["ext/extconf.rb"]
 
   s.files         = `git ls-files`.split("\n")

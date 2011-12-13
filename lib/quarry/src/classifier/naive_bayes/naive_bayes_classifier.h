@@ -2,6 +2,7 @@
 #define __naive_bayes_classifier_h__
 #include "classifier/classifier.h"
 #include <vector>
+#include <cmath>
 
 namespace Classifier {
   class NaiveBayesClassifier : public Classifier {

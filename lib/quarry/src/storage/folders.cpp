@@ -19,7 +19,8 @@ void Storage::Folders::load_directory(string path, DataSet::SparseDataSet *data_
   string newpath;
   struct stat info;
   FILE *file;
-  int file_length;
+  int file_length = 0;
+  int read = 0;
   
   while((dp = readdir(dir))) {
     // ignore files starting with a dot
@@ -47,7 +48,7 @@ void Storage::Folders::load_directory(string path, DataSet::SparseDataSet *data_
     }
     
     // read into the buffer
-    fread(file_data, 1, file_length - 1, file);
+    read = fread(file_data, 1, file_length - 1, file);
     file_data[file_length - 1] = 0;
     fclose(file);
     

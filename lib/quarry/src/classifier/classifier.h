@@ -6,6 +6,7 @@
 #include <vector>
 #include <iostream>
 #include <typeinfo>
+#include <stdint.h>
 using namespace std;
 
 namespace Storage {

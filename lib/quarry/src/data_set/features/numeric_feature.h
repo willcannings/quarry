@@ -3,6 +3,8 @@
 #include "data_set/example.h"
 #include "data_set/feature.h"
 #include <iostream>
+#include <cstdlib>
+#include <cstring>
 
 namespace DataSet {
   class DataSet;

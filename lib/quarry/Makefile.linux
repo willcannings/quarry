@@ -1,2 +1,4 @@
 STATIC_LIB = ar rcs
+CXX = g++
+CPPFLAGS = -fPIC -std=gnu++0x -Wno-multichar -Wno-write-strings
 include Makefile.targets
