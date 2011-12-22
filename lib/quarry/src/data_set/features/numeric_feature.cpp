@@ -59,7 +59,7 @@ void DataSet::NumericFeature::index_example(double value, Example *example) {
 
 void DataSet::NumericFeature::finalise_indexing(DataSet *data_set) {}
 
-void DataSet::NumericFeature::print(DataSet::DataSet *data_set) {
+void DataSet::NumericFeature::print(DataSet *data_set) {
   cout << "F" << index << ", " << name << endl;
   print_counts(&counts);
   for(int i = 0; i < (data_set->categories_size() + 1); i++) {

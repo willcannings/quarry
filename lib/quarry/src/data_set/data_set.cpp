@@ -76,10 +76,12 @@ void DataSet::DataSet::index() {
 // TODO: this isn't really stratification; categories should be proportionally represented
 vector<vector<DataSet::Example *> > *DataSet::DataSet::stratify(int number_of_folds) {
   int examples_per_fold = examples.size() / number_of_folds;
+  vector<vector<Example *> > *folds = new vector<vector<Example *> >();
+  folds->resize(number_of_folds);
   Example *example;
-  vector<vector<Example *> > *folds = new vector<vector<Example *> >(number_of_folds, vector<Example *>(examples_per_fold, NULL));
   
   for(int fold = 0; fold < number_of_folds; fold++) {
+    (*folds)[fold].resize(examples_per_fold);
     for(int i = 0; i < examples_per_fold; i++) {
       (*folds)[fold][i] = examples[fold + (i * number_of_folds)];
     }
