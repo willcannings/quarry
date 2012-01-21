@@ -29,9 +29,10 @@ namespace DataSet {
       return new SparseDataSet(this);
     }
     
-    SparseExample *new_example(int buffer_size = 0) {
+    SparseExample *new_example(int buffer_size = 0, bool add_to_data_set = true) {
       SparseExample *example = new SparseExample(buffer_size);
-      examples.push_back(example);
+      if(add_to_data_set)
+        examples.push_back(example);
       return example;
     }
   };

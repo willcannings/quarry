@@ -37,7 +37,7 @@ namespace Preprocessing {
         }
         
         // construct the example
-        DataSet::SparseExample *example = data_set->new_example(token_counts.size());
+        DataSet::SparseExample *example = data_set->new_example(token_counts.size(), false);
         DataSet::Feature *feature = NULL;
         
         for(map<string, int>::iterator token_counts_it = token_counts.begin(); token_counts_it != token_counts.end(); token_counts_it++) {

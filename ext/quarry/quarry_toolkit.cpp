@@ -45,6 +45,24 @@ Object model_rank_text_names(Object self, Object text) {
   return names;
 }
 
+Object quarry_rank_text_names_from_binary_model(Object path, Object text) {
+  string model_path = from_ruby<string>(path);
+  string example_text = from_ruby<string>(text);
+  Array names;
+  
+  Storage::Binary reader(model_path);
+  Model::Model *model = reader.read_model();
+  
+  vector<Classifier::Score> *ranks = model->rank_text(example_text);
+  DataSet::NominalFeature *categories = model->data_set->category_feature();
+  for(unsigned int i = 0; i < ranks->size(); i++)
+    names.push(categories->names[ranks->at(i).category]);
+  
+  delete ranks;
+  delete model;
+  return names;
+}
+
 
 extern "C" {
 	
@@ -55,6 +73,8 @@ extern "C" {
     Module rb_mPreprocessing = define_module_under(rb_mQuarry, "Preprocessing");
     Module rb_mText = define_module_under(rb_mPreprocessing, "Text");
     
+    // quarry helper
+    rb_mQuarry.define_module_function("rank_text_names_from_binary_model", &quarry_rank_text_names_from_binary_model);
     
     // text pipeline
     rb_mText.define_module_function("standard_pipeline", &Preprocessing::Text::StandardPipeline);

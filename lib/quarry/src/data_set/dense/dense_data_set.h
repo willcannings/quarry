@@ -28,9 +28,10 @@ namespace DataSet {
       return new DenseDataSet(this);
     }
     
-    DenseExample *new_example() {
+    DenseExample *new_example(bool add_to_data_set = true) {
       DenseExample *example = new DenseExample(features.size());
-      examples.push_back(example);
+      if(add_to_data_set)
+        examples.push_back(example);
       return example;
     }
   };

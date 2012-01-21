@@ -7,6 +7,7 @@ namespace Preprocessing {
     
     class TokenSelector {
     public:
+      virtual ~TokenSelector() {}
       virtual bool select(char *start, char *end) { return true; }
       virtual uint32_t mark() = 0;
     };

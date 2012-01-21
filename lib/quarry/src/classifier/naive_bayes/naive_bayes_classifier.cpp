@@ -74,8 +74,13 @@ void Classifier::NaiveBayesClassifier::write_binary(Storage::Binary *file) {
 void Classifier::NaiveBayesClassifier::read_binary(Storage::Binary *file) {
   int category_count = file->read_int();
   feature_caches.resize(category_count + 1);
-  category_probabilities = *(file->read_vector<double>());
+  vector<double> *probabilities = file->read_vector<double>();
+  category_probabilities = *probabilities;
+  delete probabilities;
   
-  for(int i = 1; i <= category_count; i++)
-    feature_caches[i] = *(file->read_vector<NumericFeatureCache>());
+  for(int i = 1; i <= category_count; i++) {
+    vector<NumericFeatureCache> *caches = file->read_vector<NumericFeatureCache>();
+    feature_caches[i] = *caches;
+    delete caches;
+  }
 }

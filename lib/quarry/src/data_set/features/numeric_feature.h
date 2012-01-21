@@ -15,6 +15,11 @@ namespace DataSet {
       reset();
     }
     
+    ~NumericFeature() {
+      if(category_counts != NULL)
+        free(category_counts);
+    }
+    
     NumericFeature *clone() {
       return new NumericFeature(name, index);
     }

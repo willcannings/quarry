@@ -55,6 +55,7 @@ void Storage::Folders::load_directory(string path, DataSet::SparseDataSet *data_
     // insert a new example into the dataset
     example = pipeline->process_text(data_set, file_data, true);
     example->set_category_index(data_set, category_index);
+    data_set->examples.push_back(example);
     
     file_count++;
     if((file_count % 10000) == 0)

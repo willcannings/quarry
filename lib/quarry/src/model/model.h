@@ -4,6 +4,7 @@
 #include "data_set/example.h"
 #include "classifier/classifier.h"
 #include "preprocessing/text/text_pipeline.h"
+#include <iostream>
 
 namespace Model {
   class Model {
@@ -13,6 +14,14 @@ namespace Model {
     Preprocessing::Text::TextPipeline *text_pipeline;
     
     Model() : data_set(NULL), classifier(NULL), text_pipeline(NULL) {}
+    ~Model() {
+      if(data_set)
+        delete data_set;
+      if(classifier)
+        delete classifier;
+      if(text_pipeline)
+        delete text_pipeline;
+    }
     
     void train(DataSet::Example *example);
     void train_text(string text);

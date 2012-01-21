@@ -28,6 +28,20 @@ namespace Preprocessing {
       TextPipeline() : tokeniser(NULL), processors(), selectors(), generator(NULL), tokens() {}      
       DataSet::SparseExample *process_text(DataSet::SparseDataSet *data_set, char *text, bool create_features);
       void process_token(char *start, char *end);
+      
+      ~TextPipeline() {
+        // tokens stores ptrs to offsets of a string which is handled externally,
+        // so doesn't need to be released here
+        if(tokeniser)
+          delete tokeniser;
+        if(generator)
+          delete generator;
+        
+        for(unsigned int i = 0; i < processors.size(); i++)
+          delete processors[i];
+        for(unsigned int i = 0; i < selectors.size(); i++)
+          delete selectors[i];
+      }
     };
     
     TextPipeline *StandardPipeline();

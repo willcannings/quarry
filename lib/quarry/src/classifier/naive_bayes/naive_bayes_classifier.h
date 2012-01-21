@@ -33,6 +33,7 @@ namespace Classifier {
     static const uint32_t file_mark = 'naiv';
     NaiveBayesClassifier(DataSet::DataSet *data_set) : Classifier(data_set) {}
     NaiveBayesClassifier *clone(DataSet::DataSet *new_data_set);
+    virtual ~NaiveBayesClassifier() {}
     
     double score(int category, DataSet::Example *example);
     void prepare();

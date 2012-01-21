@@ -104,16 +104,26 @@ DataSet::DataSet *Storage::Binary::read_data_set() {
       
       // read cached frequencies and probabilities if present
       if(data_set->counted) {
-        nominal_feature->frequencies = *read_vector<int>();
-        nominal_feature->probabilities = *read_vector<double>();
+        vector<int> *frequencies = read_vector<int>();
+        vector<double> *probabilities = read_vector<double>();
+        nominal_feature->frequencies = *frequencies;
+        nominal_feature->probabilities = *probabilities;
         nominal_feature->category_frequencies.resize(num_categories + 1);
         nominal_feature->category_probabilities.resize(num_categories + 1);
+        delete frequencies;
+        delete probabilities;
         
-        for(int i = 1; i <= num_categories; i++)
-          nominal_feature->category_frequencies[i] = *read_vector<int>();
+        for(int i = 1; i <= num_categories; i++) {
+          frequencies = read_vector<int>();
+          nominal_feature->category_frequencies[i] = *frequencies;
+          delete frequencies;
+        }
         
-        for(int i = 1; i <= num_categories; i++)
-          nominal_feature->category_probabilities[i] = *read_vector<double>();
+        for(int i = 1; i <= num_categories; i++) {
+          probabilities = read_vector<double>();
+          nominal_feature->category_probabilities[i] = *probabilities;
+          delete probabilities;
+        }
       }
       
       // TODO: read cached indexes

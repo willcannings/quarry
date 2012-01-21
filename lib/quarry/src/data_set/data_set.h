@@ -26,6 +26,14 @@ namespace DataSet {
         features.push_back(feature);
       }
     }
+    
+    virtual ~DataSet() {
+      for(unsigned int i = 0; i < features.size(); i++)
+        delete features[i];
+      for(unsigned int i = 0; i < examples.size(); i++)
+        delete examples[i];
+    }
+
     virtual DataSet *clone_without_examples() { return NULL; }
     
     tr1::unordered_map<string, Feature *> feature_names;
@@ -38,7 +46,7 @@ namespace DataSet {
     
     NumericFeature  *new_numeric_feature(string name);
     NominalFeature  *new_nominal_feature(string name);
-    virtual Example *new_example() { return NULL; }
+    virtual Example *new_example(bool add_to_data_set = true) { return NULL; }
     
     void count();
     void index();

@@ -3,6 +3,7 @@
 #include "data_set/example.h"
 #include <stdlib.h>
 #include <string>
+#include <iostream>
 using namespace std;
 
 namespace DataSet {
@@ -23,6 +24,11 @@ namespace DataSet {
         values = (Value *) calloc(sizeof(Value), buffer_size);
       else
         values = NULL;
+    }
+    
+    ~SparseExample() {
+      if(values != NULL)
+        free(values);
     }
     
     double get_value(int feature_index);    

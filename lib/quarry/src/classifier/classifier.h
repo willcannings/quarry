@@ -46,6 +46,8 @@ namespace Classifier {
       }
     }
     
+    virtual ~Classifier() {}
+    
     virtual void prepare() {};
     virtual Classifier *clone(DataSet::DataSet *new_data_set) = 0;
     virtual double score(int category, DataSet::Example *example) = 0;

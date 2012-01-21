@@ -4,7 +4,6 @@
 using namespace std;
 using namespace tr1;
 
-static unordered_set<string> *stop_words = NULL;
 static int stop_word_count = 586;
 static string stop_word_list[] = {
   "a", "able", "about", "above", "abroad", "according", "accordingly", "across", "actually", "adj",
@@ -69,14 +68,11 @@ static string stop_word_list[] = {
 };
 
 Preprocessing::Text::StopWords::StopWords() : TokenSelector() {
-  if(stop_words == NULL) {
-    stop_words = new unordered_set<string>();
-    for(int i = 0; i < stop_word_count; i++)
-      stop_words->insert(stop_word_list[i]);
-  }
+  for(int i = 0; i < stop_word_count; i++)
+    stop_words.insert(stop_word_list[i]);
 }
 
 bool Preprocessing::Text::StopWords::select(char *start, char *end) {
   string token = string(start, (end - start) + 1);
-  return stop_words->count(token) == 0;
+  return stop_words.count(token) == 0;
 }

@@ -14,6 +14,8 @@ namespace DataSet {
     NominalFeature(string name, int index) : Feature(name, index), names(1, "") {}
     NominalFeature(NominalFeature *other) : Feature(other->name, other->index), indexes(other->indexes), names(other->names) {}
     
+    ~NominalFeature() {}
+    
     NominalFeature *clone() {
       return new NominalFeature(this);
     }

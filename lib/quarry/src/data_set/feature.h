@@ -17,6 +17,7 @@ namespace DataSet {
     void    set_index(int new_index)    { index = new_index; }
     
     Feature(string name, int index) : name(name), index(index) {}
+    virtual ~Feature() {}
     virtual Feature *clone() { return NULL; }
     virtual void reset() {}
     virtual void print() {}
